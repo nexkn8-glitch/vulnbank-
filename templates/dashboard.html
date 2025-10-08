@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Dashboard</h2>
+  <section>
+    <h3>Your Accounts</h3>
+    <table class="accounts">
+      <thead><tr><th>ID</th><th>Name</th><th>Balance</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for a in accounts %}
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.name }}</td>
+          <td>{{ "%.2f"|format(a.balance) }}</td>
+          <td>
+            <a href="{{ url_for('account_page', account_id=a.id) }}">View</a>
+            <a href="{{ url_for('transactions_page', account_id=a.id) }}">Tx</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <h3>Actions</h3>
+    <p><a class="btn" href="{{ url_for('transfer') }}">Make Transfer</a></p>
+  </section>
+{% endblock %}

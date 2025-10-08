@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="hero">
+    <h2>Welcome to VulnBank</h2>
+    <p>Demo bank for security labs. Use responsibly.</p>
+    {% if not session.get('user_id') %}
+      <p><a class="btn" href="{{ url_for('login') }}">Login</a> <a class="btn" href="{{ url_for('register') }}">Register</a></p>
+    {% else %}
+      <p><a class="btn" href="{{ url_for('dashboard') }}">Go to Dashboard</a></p>
+    {% endif %}
+  </div>
+{% endblock %}

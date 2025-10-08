@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Upload Statement</h2>
+  <form method="post" action="{{ url_for('upload_statement') }}" enctype="multipart/form-data">
+    <label>Statement File<input type="file" name="statement"></label>
+    <button type="submit">Upload</button>
+  </form>
+  <p>Uploaded files are saved to <code>static/uploads/</code></p>
+{% endblock %}

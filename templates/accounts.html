@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Account {{ account.name }}</h2>
+  <p>Balance: <strong>{{ "%.2f"|format(account.balance) }}</strong></p>
+  <h3>Transactions</h3>
+  <table class="tx">
+    <thead><tr><th>ID</th><th>Amount</th><th>Memo</th><th>When</th></tr></thead>
+    <tbody>
+      {% for t in transactions %}
+      <tr>
+        <td>{{ t.id }}</td>
+        <td>{{ "%.2f"|format(t.amount) }}</td>
+        <!-- VULN: XSS - rendering memo with |safe so stored XSS is possible -->
+        <!-- FIX: Remove |safe and ensure proper escaping or sanitize on input -->
+        <td>{{ t.memo | safe }}</td>
+        <td>{{ t.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Admin Console</h2>
+  {% if not admin %}
+  <form method="post" action="{{ url_for('admin') }}">
+    <label>Username<input name="username" required></label>
+    <label>Password<input name="password" type="password" required></label>
+    <button type="submit">Admin Login</button>
+  </form>
+  {% else %}
+    <p>Welcome, admin. Lab-only debug tools below.</p>
+    <h3>Insecure Deserialization Demo</h3>
+    <form method="post" action="{{ url_for('admin_deserialize') }}" enctype="multipart/form-data">
+      <label>Upload pickled data <input type="file" name="data"></label>
+      <button type="submit">Deserialize</button>
+    </form>
+    <p><strong>Note:</strong> this endpoint is intentionally unsafe and only exists for controlled labs.</p>
+  {% endif %}
+{% endblock %}
